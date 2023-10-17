@@ -1,0 +1,80 @@
+﻿@model List<UsersListDto>
+@{
+    ViewData["Title"] = "لیست کاربران";
+}
+
+@section Css{
+    <link href="/assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css" rel="stylesheet">
+}
+@section Scripts {
+    <script src="/assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
+  
+    <script>
+        function change(id) {
+            $.ajax({
+                url: "/Users/ChangePassword",
+                type: "Get",
+                data: { userId: id }
+            }).done(function (result) {
+                $('#modal').modal('show');
+                $('#title').html(' عوض کردن رمز ...');
+                $('#body').html(result);
+            });
+        }
+    </script>
+    <script>
+        var tableMain = $('#data-table').DataTable({
+            "columnDefs": [{
+
+                "orderable": false
+            }],
+            "pageLength": 25
+        });
+
+        $(window).on('resize', function () {
+            $('#data-table').css("width", "100%");
+        });
+    </script>
+}
+<div class="portlet-body">
+    <div class="col-4 offset-4 d-grid gap-2">
+        <a class="btn btn-info" asp-controller="Users" asp-action="CreateUser">ثبت کاربر جدید</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped" id="data-table">
+            <thead>
+                <tr>
+                    <th>نام و نام خانوادگی</th>
+                    <th>نام کاربری</th>
+                    <th>شماره موبایل</th>
+                    <th>نقش</th>
+                    <td>عملیات</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>@item.Username</td>
+
+                        <td>@item.Mobile</td>
+                        <td>@item.RoleTitle</td>
+                        <td>
+                            <a asp-action="EditUser" asp-route-userId="@item.Id" class="btn btn-info btn-round">ویرایش</a>
+                            @if (ViewBag.CanEdit)
+                            {
+                                <a href="#" onclick="change(@item.Id)" class="btn btn-warning btn-round">تغییر پسورد</a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+

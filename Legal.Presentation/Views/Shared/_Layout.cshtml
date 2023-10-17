@@ -1,0 +1,235 @@
+﻿@using Legal.Application.Extensions;
+@using Legal.Application.Helpers;
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl" class="rtl">
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <partial name="_CssRefrences" />
+
+    <!-- END CSS -->
+    <!-- BEGIN PAGE CSS -->
+    @await RenderSectionAsync("Css",false)
+    <!-- END PAGE CSS -->
+</head>
+<body class="active-ripple theme-blue fix-header sidebar-extra">
+    <div id="loader">
+        <div class="spinner"></div>
+    </div><!-- /loader -->
+    <!-- END LOEADING -->
+    <!-- BEGIN HEADER -->
+    <div class="navbar navbar-fixed-top" id="main-navbar">
+        <div class="header-right">
+            <a href="/" class="logo-con">
+                <img src="/Images/logo3.png" class="img-responsive center-block" alt="لوگو آرایشگاه بیک ">
+            </a>
+        </div><!-- /.header-right -->
+        <div class="header-left">
+            <div class="top-bar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" class="btn" id="toggle-sidebar">
+                            <span class="menu"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn open" id="toggle-sidebar-top">
+                            <i class="icon-user-following"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn" id="toggle-dark-mode">
+                            <i class="icon-bulb"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="dropdown">
+                        <a href="#" class="btn" id="toggle-fullscreen">
+                            <i class="icon-size-fullscreen"></i>
+                        </a>
+                    </li>
+
+                    <li class="dropdown dropdown-user">
+                        @await Component.InvokeAsync("UserTitle")
+                    </li>
+                </ul><!-- /.navbar-left -->
+            </div><!-- /.top-bar -->
+        </div><!-- /.header-left -->
+    </div><!-- /.navbar -->
+    <!-- END HEADER -->
+    <!-- BEGIN WRAPPER -->
+    <div id="wrapper">
+
+        <!-- BEGIN SIDEBAR -->
+        <div id="sidebar">
+
+            <div class="side-menu-container">
+                <ul class="metismenu" id="side-menu">
+                    <li class="open active conditional-bg">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="icon-home"></i>
+                            <span>مدیریت</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a asp-controller="Users" asp-action="Index" class="">
+                                    <i class="icon-user"></i>
+                                    <span>لیست کاربران</span>
+                                </a>
+                            </li>
+                         
+                        </ul>
+                    </li>
+                 
+                </ul><!-- /#side-menu -->
+            </div><!-- /.side-menu-container -->
+        </div><!-- /#sidebar -->
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE CONTENT -->
+        <div id="page-content">
+            <div class="row">
+                <!-- BEGIN BREADCRUMB -->
+                <div class="col-md-12">
+                    <div class="breadcrumb-box shadow">
+                        <ul class="breadcrumb">
+                            <li><a href="#">@ViewData["Title"]</a></li>
+                        </ul>
+                        <div class="breadcrumb-left">
+                            @DateTime.Now.PersionDayOfWeek()، @DateTime.Now.ToShamsi()
+                            <i class="icon-calendar"></i>
+                        </div><!-- /.breadcrumb-left -->
+                    </div><!-- /.breadcrumb-box -->
+                </div><!-- /.col-md-12 -->
+                <!-- END BREADCRUMB -->
+                <div class="col-12">
+                    <div class="portlet box shadow">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h3 class="title">
+                                    <i class="icon-note"></i>
+                                    @ViewData["Title"]
+                                </h3>
+                            </div><!-- /.portlet-title -->
+                            <div class="buttons-box">
+                                <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                                    <i class="icon-size-fullscreen"></i>
+                                </a>
+                                <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                                    <i class="icon-arrow-up"></i>
+                                </a>
+                            </div><!-- /.buttons-box -->
+                        </div><!-- /.portlet-heading -->
+                        <div class="portlet-body">
+                            @RenderBody()
+                        </div><!-- /.portlet-body -->
+                    </div><!-- /.portlet -->
+                </div><!-- /.col-12 -->
+            </div><!-- /.row -->
+        </div><!-- /#page-content -->
+        <!-- END PAGE CONTENT -->
+
+    </div><!-- /#wrapper -->
+    <!-- END WRAPPER -->
+
+    <div class="row footer-container">
+        <div class="col-md-12">
+            <div class="copyright">
+                <p class="float-start">
+                    کلیه حقوق مادی و معنوی این سایت متعلق به شرکت فنی ، مهندسی و برنامه نویسی فروزان می باشد و کپی برداری از آن به هیچ عنوان جایز نیست.
+                </p>
+
+            </div><!-- /.copyright -->
+        </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+    <!-- BEGIN SETTING -->
+    <div class="settings d-none d-sm-block">
+        <a href="#" class="btn" id="toggle-setting">
+            <i class="icon-settings"></i>
+        </a>
+
+        <div class="setting-content">
+            <h3 class="text-center">تنظیمات</h3>
+            <div class="fix-header-box">
+                <p class="h6">
+                    هدر ثابت:
+                    <span class="pull-left">
+                        <input type="checkbox" class="fix-header-switch normal" checked>
+                    </span>
+                </p>
+            </div><!-- /.fix-header-box -->
+            <hr class="light">
+            <div class="toggle-sidebar-box">
+                <p class="h6">
+                    جمع کردن سایدبار:
+                    <span class="pull-left">
+                        <input type="checkbox" class="toggle-sidebar-switch normal">
+                    </span>
+                </p>
+            </div><!-- /.toggle-sidebar-box -->
+            <hr class="light">
+            <div class="toggle-sidebar-box">
+                <p class="h6">
+                    سایدبار خلاقانه:
+                    <span class="pull-left">
+                        <input type="checkbox" class="creative-sidebar-switch normal">
+                    </span>
+                </p>
+            </div><!-- /.toggle-sidebar-box -->
+            <hr class="light">
+            <div class="theme-colors">
+                <p class="h6">رنگ قالب : </p>
+                <a class="btn btn-round btn-blue ripple-effect active" data-color="blue"></a>
+                <a class="btn btn-round btn-red ripple-effect" data-color="red"></a>
+                <a class="btn btn-round btn-green ripple-effect" data-color="green"></a>
+                <a class="btn btn-round btn-orange ripple-effect" data-color="orange"></a>
+                <a class="btn btn-round btn-purple ripple-effect" data-color="purple"></a>
+                <a class="btn btn-round btn-deeporange ripple-effect" data-color="deeporange"></a>
+                <a class="btn btn-round btn-cyan ripple-effect" data-color="cyan"></a>
+                <a class="btn btn-round btn-rose ripple-effect" data-color="rose"></a>
+                <a class="btn btn-round btn-lime ripple-effect" data-color="lime"></a>
+                <a class="btn btn-round btn-darkorange ripple-effect" data-color="darkorange"></a>
+                <a class="btn btn-round btn-darkpurple ripple-effect" data-color="darkpurple"></a>
+                <a class="btn btn-round btn-darkblue ripple-effect" data-color="darkblue"></a>
+            </div><!-- /.theme-colors -->
+
+        </div><!-- /.setting-content -->
+
+
+        <div class="img-box">
+            <img class="img-bottom dark" src="/Images/logo3.png">
+            <img class="img-bottom light" src="/Images/logo3.png">
+        </div><!-- /.img-box -->
+    </div><!-- /.settings -->
+    <!-- END SETTING -->
+    <!-- BEGIN CODE MODAL -->
+    <div id="modal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">نمونه مودال عمومی</h4>
+                </div><!-- /.modal-header -->
+                <div class="modal-body" id="body">
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                </div><!-- /.modal-body -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- /.modal -->
+    <!-- END CODE MODAL -->
+
+    <div>
+    </div>
+    <partial name="_JsRefrences" />
+    <partial name="_Notification" />
+    @await RenderSectionAsync("Scripts", false)
+</body>
+</html>

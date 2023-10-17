@@ -1,0 +1,217 @@
+﻿@model CreateUserDto
+@{
+    ViewData["Title"] = "ثبت کاربر جدید";
+    List<RolesListDto>? roles = ViewData["Roles"] as List<RolesListDto>;
+    List<RegionsListDto>? regions = ViewData["Regions"] as List<RegionsListDto>;
+    List<OstansListDto>? ostans = ViewData["Ostans"] as List<OstansListDto>;
+    List<ShahrestansListDto>? shahrs = ViewData["Shahrs"] as List<ShahrestansListDto>;
+
+}
+<form asp-action="CreateUser" method="post">
+    <div class="col-12 row mb-2">
+        <div class="col-sm-12 col-lg-6 row mb-md-2">
+            <div class="col-3">
+                <label>انتخاب نقش کاربر</label>
+            </div>
+            <div class="col-9">
+                <select asp-for="RoleId" class="form-select" onchange="SelectRole()">
+                    <option value="">انتخاب کنید</option>
+                    @foreach (var item in roles)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-6 row mb-md-2">
+            <div class="col-3">
+                <label>شماره موبایل</label>
+            </div>
+            <div class="col-9">
+                <input type="text" class="form-control" asp-for="Mobile" maxlength="12"
+                       disabled required onkeypress="return isNumberKey(event)"
+                       onblur="SetUserName()"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 row mb-2" style="visibility:hidden" id="UserInfo">
+        <div class="col-sm-12 col-lg-4 row mb-md-2">
+            <div class="col-3">
+                <label>نام و نام خانوادگی</label>
+            </div>
+            <div class="col-9">
+                <input type="text" class="form-control" asp-for="FullName" maxlength="200"
+                       required />
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-4 row mb-md-2">
+            <div class="col-3">
+                <label>نام کاربری</label>
+            </div>
+            <div class="col-9">
+                <input type="text" class="form-control" asp-for="Username" maxlength="200"
+                       required />
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-4 row mb-md-2">
+            <div class="col-3">
+                <label>کلمه عبور</label>
+            </div>
+            <div class="col-9">
+                <input type="password" class="form-control" asp-for="Password" maxlength="200"
+                       required />
+            </div>
+        </div>
+    </div>
+    <div class="col-12 row mb-2">
+        <div class="col-sm-12 col-lg-4 row mb-md-2" id="regionDiv" style="visibility:hidden">
+            <div class="col-3">
+                <label>انتخاب منطقه</label>
+            </div>
+            <div class="col-9">
+                <select asp-for="RegionId" class="form-select" onchange="SelectRegions()">
+                    <option value="">انتخاب کنید</option>
+                    @foreach (var item in regions)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-4 row mb-md-2" id="ostanDiv" style="visibility:hidden">
+            <div class="col-3">
+                <label>انتخاب استان</label>
+            </div>
+            <div class="col-9">
+                <select asp-for="OstanId" class="form-select" onchange="SelectOstans()">
+                    <option value="">انتخاب کنید</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-4 row mb-md-2" id="shahrDiv" style="visibility:hidden">
+            <div class="col-3">
+                <label>انتخاب شهرستان</label>
+            </div>
+            <div class="col-9">
+                <select asp-for="ShahrestanId" class="form-select">
+                    <option value="">انتخاب کنید</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid offset-4 col-4 gap-2">
+        <input type="submit" value="ثبت" class="btn btn-success" />
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+    </script>
+    <script>
+        function SelectRole() {
+            var role = $("#RoleId").val();
+            console.log(role);
+            if (role != '') {
+                $("#Mobile").prop('disabled', false);
+                $("#UserInfo").css('visibility', 'visible');
+                $("#ShahrestanId").Empty();
+            } else {
+                $("#Mobile").prop('disabled', true);
+                $("#UserInfo").css('visibility', 'hidden');
+                $("#Mobile").val('');
+                $("#FullName").val('');
+                $("#Username").val('');
+                $("#Password").val('');
+            }
+            if (role == 1 || role == 2 || role == 3) {
+                $("#regionDiv").css('visibility', 'hidden');
+                $("#ostanDiv").css('visibility', 'hidden');
+                $("#shahrDiv").css('visibility', 'hidden');
+            }
+            else if (role == 4 || role == 5) {
+                $("#regionDiv").css('visibility', 'visible');
+                $("#ostanDiv").css('visibility', 'hidden');
+                $("#shahrDiv").css('visibility', 'hidden');
+            } else if (role == 6 || role == 7) {
+                $("#regionDiv").css('visibility', 'visible');
+                $("#ostanDiv").css('visibility', 'visible');
+                $("#shahrDiv").css('visibility', 'hidden');
+            }
+            else {
+                $("#regionDiv").css('visibility', 'visible');
+                $("#ostanDiv").css('visibility', 'visible');
+                $("#shahrDiv").css('visibility', 'visible');
+            }
+
+        }
+    </script>
+
+    <script>
+        function SelectRegions() {
+            var region = $("#RegionId").val();
+
+            $.ajax({
+                url: "/Users/GetOstans",
+                type: "GET",
+                data: { regionId: region },
+                success: function (data) {
+
+                    console.log(data);
+
+                    $.each(data, function (index, value) {
+                        $("#OstanId").append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.title));
+                    })
+
+                },
+                error: function () {
+                    console.log("Error occurred while loading Ostan.");
+                }
+            });
+
+        }
+    </script>
+    <script>
+        function SetUserName() {
+            var mobile = $("#Mobile").val();
+            $("#Username").val(mobile);
+        }
+    </script>
+    <script>
+        function SelectOstans() {
+            var ostan = $("#OstanId").val();
+
+            $.ajax({
+                url: "/Users/GetShahrs",
+                type: "GET",
+                data: { ostanId: ostan },
+                success: function (data) {
+
+                    console.log(data);
+
+                    $.each(data, function (index, value) {
+                        $("#ShahrestanId").append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.title));
+                    })
+
+                },
+                error: function () {
+                    console.log("Error occurred while loading Ostan.");
+                }
+            });
+        }
+    </script>
+
+
+
+}

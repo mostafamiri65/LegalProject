@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Legal.Application.DTOs.Common
+{
+    public class RegionsListDto
+    {
+        public int Id { get; set; }
+        public string? Title { get; set; }
+    }
+}
