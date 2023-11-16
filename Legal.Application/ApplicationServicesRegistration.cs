@@ -15,6 +15,7 @@ namespace Legal.Application
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IDocService, DocService>();
         }
     }
 }

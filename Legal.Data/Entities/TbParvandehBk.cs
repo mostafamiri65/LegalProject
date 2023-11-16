@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Legal.Data.Entities;
 
-public partial class TbParvandeh
+public partial class TbParvandehBk
 {
     public int Id { get; set; }
 
@@ -47,7 +47,7 @@ public partial class TbParvandeh
 
     public string? TajdidDate { get; set; }
 
-    public bool? TajdidKhahan { get; set; }
+    public bool TajdidKhahan { get; set; }
 
     public bool? RayTajdidOk { get; set; }
 

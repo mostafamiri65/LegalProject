@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.RegisterDb();
+builder.Services.RegisterDb(builder.Configuration.GetConnectionString("Mostafa"));
 builder.Services.ConfigureApplicationServices();
 #region Authentication
 

@@ -15,6 +15,12 @@ public partial class TbRole
 
     public bool HasOstanAccess { get; set; }
 
+    public bool? HasEditAccess { get; set; }
+
+    public bool? HasRegionAccess { get; set; }
+
+    public bool IsOrganization { get; set; }
+
     public DateTime CreateDate { get; set; }
 
     public long? CreateBy { get; set; }
@@ -28,10 +34,6 @@ public partial class TbRole
     public string? ModifiedIp { get; set; }
 
     public Guid? Gid { get; set; }
-
-    public bool? HasEditAccess { get; set; }
-
-    public bool? HasRegionAccess { get; set; }
 
     public virtual ICollection<TbUserRole> TbUserRoles { get; set; } = new List<TbUserRole>();
 }

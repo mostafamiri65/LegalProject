@@ -1,0 +1,110 @@
+﻿@model CreateShakhsDto
+@{ Layout = null;}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddKhahan" method="post">
+            <input type="hidden" asp-for="ParvandeId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control"/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NamePedar" class="control-label"></label>
+                <input asp-for="NamePedar" class="form-control"/>
+                <span asp-validation-for="NamePedar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pisheh" class="control-label"></label>
+                <input asp-for="Pisheh" class="form-control"/>
+                <span asp-validation-for="Pisheh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control"/>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tel" class="control-label"></label>
+                <input asp-for="Tel" class="form-control"/>
+                <span asp-validation-for="Tel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mobile" class="control-label"></label>
+                <input asp-for="Mobile" class="form-control"/>
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Faks" class="control-label"></label>
+                <input asp-for="Faks" class="form-control"/>
+                <span asp-validation-for="Faks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Site" class="control-label"></label>
+                <input asp-for="Site" class="form-control"/>
+                <span asp-validation-for="Site" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jens" class="control-label"></label>
+                <select asp-for="Jens" class="form-control form-select">
+                    <option>انتخاب کنید</option>
+                    <option value="1">حقوقی</option>
+                    <option value="2">مرد</option>
+                    <option value="3">زن</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoehAshkhasCode" class="control-label"></label>
+                <input asp-for="NoehAshkhasCode" class="form-control"/>
+                <span asp-validation-for="NoehAshkhasCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTavalod" class="control-label"></label>
+                <input asp-for="DateTavalod" class="form-control"/>
+                <span asp-validation-for="DateTavalod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Semat" class="control-label"></label>
+                <input asp-for="Semat" class="form-control"/>
+                <span asp-validation-for="Semat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodeMeli" class="control-label"></label>
+                <input asp-for="CodeMeli" class="form-control"/>
+                <span asp-validation-for="CodeMeli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodePosti" class="control-label"></label>
+                <input asp-for="CodePosti" class="form-control"/>
+                <span asp-validation-for="CodePosti" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    kamaDatepicker('DateTavalod',
+        {
+            buttonsColor: "green",
+            forceFarsiDigits: false,
+            markToday: true,
+            markHolidays: true,
+            gotoToday: true
+        });
+</script>

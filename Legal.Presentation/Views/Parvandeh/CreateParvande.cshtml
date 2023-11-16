@@ -1,0 +1,149 @@
+﻿@model CreateParvandeDto
+@{
+    ViewData["Title"] = "پرونده جدید";
+    var anvae = ViewData["Anvae"] as List<NoeParvandehDto>;
+    var ostans = ViewData["Ostan"] as List<OstansListDto>;
+}
+@section Css
+    {
+    <link href="/assets/plugins/kamadatepicker/kamadatepicker.min.css" rel="stylesheet" />
+}
+@section Scripts
+    {
+    <script src="/assets/plugins/kamadatepicker/kamadatepicker.min.js"></script>
+    <script src="/assets/js/pages/CreateParvande.js"></script>
+    <script src="/js/Parvande2.js"></script>
+
+}
+<form asp-action="CreateParvande" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="row mb-2">
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>نوع پرونده</label>
+            </div>
+            <div class="col-sm-7">
+                <select class="form-control form-select" asp-for="NoyehParvandehCode"
+                        title="نوع پرونده">
+                    <option value="">انتخاب کنید</option>
+                    @if (anvae != null)
+                    {
+                        foreach (var item in anvae)
+                        {
+                            <option value="@item.Id">@item.Title</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>مرج قضایی رسیدگی</label>
+            </div>
+            <div class="col-sm-7">
+                <select class="form-control form-select" asp-for="MarjId" title="مرجع قضایی">
+                    <option value="">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>استان</label>
+            </div>
+            <div class="col-sm-7">
+                <select class="form-control form-select" asp-for="OstanId" title="استان">
+                    <option value="">انتخاب کنید</option>
+                    @if (ostans != null)
+                    {
+                        foreach (var item in ostans)
+                        {
+                            <option value="@item.Id">@item.Title</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>شهرستان</label>
+            </div>
+            <div class="col-sm-7">
+                <select class="form-control form-select" asp-for="ShahrestanId" title="شهرستان">
+                    <option value="">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm-12 col-md-6 col-lg-6 row">
+            <div class="col-sm-3">
+                <label>شماره 24 رقمی پرونده</label>
+            </div>
+            <div class="col-sm-9">
+                <input asp-for="ShParvandeh24" class="form-control " autocomplete="off"
+                       maxlength="24" title="شماره 24 رقمی پرونده" />
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>شماره شعبه</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="ShShobeh" class="form-control " autocomplete="off" title="شماره شعبه" />
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>شماره بایگانی سازمان</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="ShParvandeh" class="form-control " autocomplete="off" title="شماره بایگانی سازمان" />
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>مجتمع قضایی</label>
+            </div>
+            <div class="col-sm-7">
+                <select class="form-control form-select" asp-for="MogId" title="مجتمع قضایی">
+                    <option value="">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 row">
+            <div class="col-sm-5">
+                <label>تاریخ ایجاد</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="DateIjad" class="form-control " autocomplete="off"
+                       title="تاریخ ایجاد" />
+            </div>
+
+        </div>
+    </div>
+    <div class="row mb-2">
+        <a class="btn btn-primary col-sm-2 btn-sm" onclick="AddKhahan()">اضافه کردن خواهان</a>
+        <div class="col-12">
+            <table class="table table-bordered table-hover table-striped" id="data-table">
+                <thead>
+                    <tr>
+                        <th>نام </th>
+                        <th>نام خانوادگی</th>
+                        <th>شماره موبایل</th>
+                        <th>کد ملی</th>
+                        <td>عملیات</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</form>

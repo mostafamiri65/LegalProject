@@ -24,4 +24,8 @@ public partial class TbShahrestan
     public string? ModifiedIp { get; set; }
 
     public Guid? Gid { get; set; }
+
+    public bool? IsOstan { get; set; }
+
+    public virtual ICollection<TbNoyehParvandehMog> TbNoyehParvandehMogs { get; set; } = new List<TbNoyehParvandehMog>();
 }
